@@ -22,40 +22,40 @@ Route::get('home', [
 ]);
 
 // User Registration
-Route::group(['prefix' => 'auth', 'as' => 'user.'], function() {
+Route::group(['prefix' => 'auth', 'as' => 'user.', 'middleware' => ['web']], function() {
     Route::get('register', [
         'as' => 'create',
         'uses' => 'Auth\RegisterController@showRegistrationForm'
     ]);
-    Route::get('register', [
+    Route::post('register', [
         'as' => 'store',
         'uses' => 'Auth\RegisterController@register'
     ]);
 });
 
 // Session
-Route::group(['prefix' => 'auth', 'as' => 'session.'], function() {
+Route::group(['prefix' => 'auth', 'as' => 'session.','middleware' => ['web']], function() {
     Route::get('login', [
         'as' => 'create',
         'uses' => 'Auth\LoginController@showLoginForm'
     ]);
-    Route::get('login', [
+    Route::post('login', [
         'as' => 'store',
         'uses' => 'Auth\LoginController@login'
     ]);
-    Route::get('login', [
+    Route::get('logout', [
         'as' => 'destroy',
         'uses' => 'Auth\LoginController@logout'
     ]);
 });
 
 // Password Reminder
-Route::group(['prefix' => 'password'], function() {
+Route::group(['prefix' => 'auth','middleware' => ['web']], function() {
     Route::get('remind', [
         'as' => 'reminder.create',
         'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm'
     ]);
-    Route::get('remind', [
+    Route::post('remind', [
         'as' => 'reminder.store',
         'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail'
     ]);
@@ -63,7 +63,7 @@ Route::group(['prefix' => 'password'], function() {
         'as' => 'reset.create',
         'uses' => 'Auth\ResetPasswordController@showResetForm'
     ]);
-    Route::get('reset', [
+    Route::post('reset', [
         'as' => 'reset.store',
         'uses' => 'Auth\ResetPasswordController@reset'
     ]);
