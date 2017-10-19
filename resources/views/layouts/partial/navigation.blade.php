@@ -24,9 +24,7 @@
             <a href="{{ route('user.create') }}"><i class="fa fa-certificate icon"></i> Sign up</a>
           </li>
         @else
-          <li>
-            <a href="{{ route('documents.show') }}"><i class="fa fa-book icon"></i> Document Viewer</a>
-          </li>
+          
           <li>
             <a href="#"><i class="fa fa-weixin icon"></i> Forum</a>
           </li>
